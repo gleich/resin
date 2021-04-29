@@ -4,6 +4,8 @@ use std::path::Path;
 use anyhow::Result;
 use serde::Deserialize;
 
+use crate::utils::to_string_vec;
+
 #[derive(Debug, Deserialize)]
 struct RawTOML {
 	scopes: Option<Vec<String>>,
@@ -18,12 +20,9 @@ pub struct Config {
 
 pub fn read() -> Result<Config> {
 	let fnames = ["stabit", "commits", "conventional_commits"];
-	let mut scopes: Vec<String> = vec![
+	let mut scopes: Vec<String> = to_string_vec(vec![
 		"lint", "deps", "release", "remove", "license", "config", "scripts",
-	]
-	.iter()
-	.map(|s| s.to_string())
-	.collect();
+	]);
 
 	for i in 0..fnames.len() {
 		let file_name = format!("{}{}", fnames[i], ".toml");
@@ -50,18 +49,17 @@ mod tests {
 	use super::*;
 	use anyhow::Result;
 
+	use crate::utils::to_string_vec;
+
 	#[test]
 	fn test_read() -> Result<()> {
 		assert_eq!(
 			read()?,
 			Config {
-				scopes: vec![
+				scopes: to_string_vec(vec![
 					"lint", "deps", "release", "remove", "license", "config", "scripts", "docker",
 					"github", "actions"
-				]
-				.iter()
-				.map(|s| s.to_string())
-				.collect(),
+				]),
 				brackets: false
 			}
 		);
