@@ -1,0 +1,5 @@
+*.Dockerfile linguist-detectable=false
+*.Dockerfile linguist-documentation=false
+
+*.py linguist-detectable=false
+*.py linguist-documentation=false
