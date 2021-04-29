@@ -8,8 +8,6 @@ struct RawTOML {
 	scopes: Option<Vec<String>>,
 	brackets: Option<bool>,
 }
-
-#[derive(Debug, Deserialize)]
 pub struct Config {
 	pub scopes: Vec<String>,
 	pub brackets: bool,
@@ -45,4 +43,23 @@ pub fn read() -> Result<Config, anyhow::Error> {
 		scopes,
 		brackets: true,
 	})
+}
+
+#[cfg(test)]
+mod tests {
+	use super::*;
+
+	#[test]
+	fn test_read() -> Result<(), anyhow::Error> {
+		let result = read()?;
+		assert_eq!(
+			result.scopes,
+			vec![
+				"lint", "deps", "release", "remove", "license", "config", "scripts", "docker",
+				"github", "actions"
+			]
+		);
+		assert_eq!(result.brackets, false);
+		Ok(())
+	}
 }
