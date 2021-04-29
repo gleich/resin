@@ -16,7 +16,7 @@ pub struct Config {
 }
 
 pub fn read() -> Result<Config, anyhow::Error> {
-	let fnames = vec!["stabit", "commits", "conventional_commits"];
+	let fnames = ["stabit", "commits", "conventional_commits"];
 	let mut scopes = vec![
 		String::from("lint"),
 		String::from("deps"),
@@ -27,8 +27,8 @@ pub fn read() -> Result<Config, anyhow::Error> {
 		String::from("scripts"),
 	];
 
-	for name in fnames {
-		let file_name = format!("{}{}", name, ".toml");
+	for i in 0..fnames.len() {
+		let file_name = format!("{}{}", fnames[i], ".toml");
 		let path = Path::new(&file_name);
 
 		if path.exists() {
