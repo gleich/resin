@@ -2,8 +2,8 @@
 FROM rust:latest AS builder
 
 # Meta data
-LABEL maintainer="project_author_email"
-LABEL description="project_description"
+LABEL maintainer="email@mattglei.ch"
+LABEL description="⚗️ CLI interface for the conventional commits commit format"
 
 # File copy
 COPY . /usr/src/app
@@ -28,7 +28,7 @@ RUN cargo make build-rust-prod
 # hadolint ignore=DL3006,DL3007
 FROM debian:stable-slim
 WORKDIR /
-COPY --from=builder /usr/src/app/target/release/project_name .
+COPY --from=builder /usr/src/app/target/release/stabit .
 
 # Install needed deps
 # hadolint ignore=DL3008
@@ -41,4 +41,4 @@ RUN apt-get update -y \
 ENV RUST_LOG info
 ENV RUST_BACKTRACE 1
 
-CMD ["./project_name"]
+CMD ["./stabit"]

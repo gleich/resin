@@ -1,7 +1,7 @@
 [package]
-name = "project_name"
+name = "stabit"
 version = "0.1.0"
-authors = ["project_author_full_name <project_author_email>"]
+authors = ["Matthew Gleich <email@mattglei.ch>"]
 edition = "2018"
 
 [dependencies]

@@ -1,12 +1,12 @@
 <!-- DO NOT REMOVE - contributor_list:data:start:["Matt-Gleich"]:end -->
 
-# project_name
+# stabit
 
-[![lint](https://github.com/github_username/project_name/actions/workflows/lint.yml/badge.svg)](https://github.com/github_username/project_name/actions/workflows/lint.yml)
-[![build](https://github.com/github_username/project_name/actions/workflows/build.yml/badge.svg)](https://github.com/github_username/project_name/actions/workflows/build.yml)
-[![test](https://github.com/github_username/project_name/actions/workflows/test.yml/badge.svg)](https://github.com/github_username/project_name/actions/workflows/test.yml)
+[![lint](https://github.com/Matt-Gleich/stabit/actions/workflows/lint.yml/badge.svg)](https://github.com/Matt-Gleich/stabit/actions/workflows/lint.yml)
+[![build](https://github.com/Matt-Gleich/stabit/actions/workflows/build.yml/badge.svg)](https://github.com/Matt-Gleich/stabit/actions/workflows/build.yml)
+[![test](https://github.com/Matt-Gleich/stabit/actions/workflows/test.yml/badge.svg)](https://github.com/Matt-Gleich/stabit/actions/workflows/test.yml)
 
-project_description
+⚗️ CLI interface for the conventional commits commit format
 
 ## 🙌 Contributing
 
