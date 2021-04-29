@@ -10,6 +10,7 @@ struct RawTOML {
 	brackets: Option<bool>,
 }
 
+#[derive(Debug, PartialEq)]
 pub struct Config {
 	pub scopes: Vec<String>,
 	pub brackets: bool,
@@ -17,15 +18,12 @@ pub struct Config {
 
 pub fn read() -> Result<Config> {
 	let fnames = ["stabit", "commits", "conventional_commits"];
-	let mut scopes = vec![
-		String::from("lint"),
-		String::from("deps"),
-		String::from("release"),
-		String::from("remove"),
-		String::from("license"),
-		String::from("config"),
-		String::from("scripts"),
-	];
+	let mut scopes: Vec<String> = vec![
+		"lint", "deps", "release", "remove", "license", "config", "scripts",
+	]
+	.iter()
+	.map(|s| s.to_string())
+	.collect();
 
 	for i in 0..fnames.len() {
 		let file_name = format!("{}{}", fnames[i], ".toml");
@@ -54,15 +52,19 @@ mod tests {
 
 	#[test]
 	fn test_read() -> Result<()> {
-		let result = read()?;
 		assert_eq!(
-			result.scopes,
-			vec![
-				"lint", "deps", "release", "remove", "license", "config", "scripts", "docker",
-				"github", "actions"
-			]
+			read()?,
+			Config {
+				scopes: vec![
+					"lint", "deps", "release", "remove", "license", "config", "scripts", "docker",
+					"github", "actions"
+				]
+				.iter()
+				.map(|s| s.to_string())
+				.collect(),
+				brackets: false
+			}
 		);
-		assert_eq!(result.brackets, false);
 		Ok(())
 	}
 }
