@@ -5,3 +5,6 @@ authors = ["Matthew Gleich <email@mattglei.ch>"]
 edition = "2018"
 
 [dependencies]
+anyhow = "1.0.40"
+toml = "0.5.8"
+serde = { version = "1.0.125", features = ["derive"] }
