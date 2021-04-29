@@ -1,6 +1,7 @@
 use std::fs;
 use std::path::Path;
 
+use anyhow::Result;
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
@@ -8,12 +9,13 @@ struct RawTOML {
 	scopes: Option<Vec<String>>,
 	brackets: Option<bool>,
 }
+
 pub struct Config {
 	pub scopes: Vec<String>,
 	pub brackets: bool,
 }
 
-pub fn read() -> Result<Config, anyhow::Error> {
+pub fn read() -> Result<Config> {
 	let fnames = ["stabit", "commits", "conventional_commits"];
 	let mut scopes = vec![
 		String::from("lint"),
@@ -48,9 +50,10 @@ pub fn read() -> Result<Config, anyhow::Error> {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use anyhow::Result;
 
 	#[test]
-	fn test_read() -> Result<(), anyhow::Error> {
+	fn test_read() -> Result<()> {
 		let result = read()?;
 		assert_eq!(
 			result.scopes,
