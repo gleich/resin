@@ -8,3 +8,4 @@ edition = "2018"
 anyhow = "1.0.40"
 toml = "0.5.8"
 serde = { version = "1.0.125", features = ["derive"] }
+dialoguer = "0.8.0"
