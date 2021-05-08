@@ -1,0 +1,29 @@
+release:
+  github:
+    owner: Matt-Gleich
+    name: 'resin'
+builds:
+  - main: dummy.go
+    goarch:
+      - amd64
+    binary: resin
+    hooks:
+      post: sh release.sh
+archives:
+  - replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
+brews:
+  - tap:
+      owner: Matt-Gleich
+      name: homebrew-taps
+    folder: Formula
+    homepage: 'https://github.com/Matt-Gleich/resin'
+    description: '⚗️ CLI interface for the conventional commits commit format'
+    commit_author:
+      name: Matt-Gleich
+      email: email@mattglei.ch
+    install: bin.install "resin"
