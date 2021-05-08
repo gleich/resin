@@ -6,6 +6,8 @@ builds:
   - main: dummy.go
     goarch:
       - amd64
+      - armv7
+      - arm64
     binary: resin
     hooks:
       post: sh release.sh
