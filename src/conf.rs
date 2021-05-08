@@ -57,8 +57,8 @@ mod tests {
 			read()?,
 			Config {
 				scopes: to_string_vec(vec![
-					"lint", "deps", "release", "remove", "license", "config", "scripts", "docker",
-					"github", "actions"
+					"none", "lint", "deps", "release", "remove", "license", "config", "scripts",
+					"docker", "github", "actions"
 				]),
 				brackets: false
 			}
