@@ -4,6 +4,7 @@ use anyhow::{Context, Result};
 
 use crate::cli::Args;
 use crate::inputs::Inputs;
+use crate::utils::output_success;
 
 pub fn commit_changes(args: &Args, inputs: &Inputs) -> Result<()> {
 	let git_program = "git";
@@ -12,16 +13,19 @@ pub fn commit_changes(args: &Args, inputs: &Inputs) -> Result<()> {
 			.args(&["add", "."])
 			.output()
 			.context("Failed to stages all changes")?;
+		output_success("Staged all changes");
 	}
 	Command::new(git_program)
 		.args(&["commit", "-m", &message(inputs)])
 		.output()
 		.context("Failed to commit changes")?;
+	output_success("Committed changes");
 	if args.push {
 		Command::new(git_program)
 			.args(&["push"])
 			.output()
 			.context("Failed to push changes")?;
+		output_success("Pushes changes");
 	}
 	Ok(())
 }
