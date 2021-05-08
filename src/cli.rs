@@ -8,7 +8,7 @@ pub struct Args {
 pub fn parse_args(args: Vec<String>) -> Args {
 	if has_flag(&args, "help", 'h') {
 		println!(
-			"stabit :: cli interface for conventional commits
+			"resin :: cli interface for conventional commits
 
 flags:
     --help    (-h) showing this help page

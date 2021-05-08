@@ -1,10 +1,10 @@
 # Contributing Guide
 
-Thank you so much for showing an interest in contributing to stabit! I am excited to see what you have to add :)
+Thank you so much for showing an interest in contributing to resin! I am excited to see what you have to add :)
 
 ## 🦀 Rust Toolchain
 
-stabit uses the nightly distribution of the rust toolchain. You can get on the nightly edition of rustfmt, the only toolchain component used by stabit, by running the following command:
+resin uses the nightly distribution of the rust toolchain. You can get on the nightly edition of rustfmt, the only toolchain component used by resin, by running the following command:
 
 ```bash
 rustup component add rustfmt --toolchain nightly
@@ -12,7 +12,7 @@ rustup component add rustfmt --toolchain nightly
 
 ## 🏗️ Build System
 
-stabit uses [cargo-make](https://github.com/sagiegurari/cargo-make) for all build scripts. Please run the following command to install cargo-make:
+resin uses [cargo-make](https://github.com/sagiegurari/cargo-make) for all build scripts. Please run the following command to install cargo-make:
 
 ```bash
 cargo install --force cargo-make
@@ -26,11 +26,11 @@ cargo make build-rust-dev
 
 ## 🧪 Linters
 
-stabit only uses two linters: [hadolint](https://github.com/hadolint/hadolint) and [rustfmt](https://github.com/rust-lang/rustfmt). hadolint will lint the dockerfiles stored in [docker/](docker/) and rustfmt will lint the source code in [src/](src/). Please install hadolint using your system's package manager and rustfmt with the toolchain command provided in the [🦀 Rust Toolchain section](#-rust-toolchain).
+resin only uses two linters: [hadolint](https://github.com/hadolint/hadolint) and [rustfmt](https://github.com/rust-lang/rustfmt). hadolint will lint the dockerfiles stored in [docker/](docker/) and rustfmt will lint the source code in [src/](src/). Please install hadolint using your system's package manager and rustfmt with the toolchain command provided in the [🦀 Rust Toolchain section](#-rust-toolchain).
 
 ## 🔄 File Syncing
 
-stabit uses a GitHub action called [gh_fsync](https://github.com/Matt-Gleich/gh_fsync) to automatically sync certain files from other repositories. The configuration for gh_fsync is stored in [fsync.yml](fsync.yml). This all means that if you update a file in this repository before removing it from the configuration then gh_fsync will reset it back. If you are looking to change a file for stabit that is listed in the configuration please remove it from the configuration or update the source file.
+resin uses a GitHub action called [gh_fsync](https://github.com/Matt-Gleich/gh_fsync) to automatically sync certain files from other repositories. The configuration for gh_fsync is stored in [fsync.yml](fsync.yml). This all means that if you update a file in this repository before removing it from the configuration then gh_fsync will reset it back. If you are looking to change a file for resin that is listed in the configuration please remove it from the configuration or update the source file.
 
 ---
 

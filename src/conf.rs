@@ -19,7 +19,7 @@ pub struct Config {
 }
 
 pub fn read() -> Result<Config> {
-	let fnames = ["stabit", "commits", "conventional_commits"];
+	let fnames = ["resin", "commits", "conventional_commits"];
 	let mut scopes: Vec<String> = to_string_vec(vec![
 		"lint", "deps", "release", "remove", "license", "config", "scripts",
 	]);

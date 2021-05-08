@@ -1,5 +1,5 @@
 [package]
-name = "stabit"
+name = "resin"
 version = "0.1.0"
 authors = ["Matthew Gleich <email@mattglei.ch>"]
 edition = "2018"

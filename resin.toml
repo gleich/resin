@@ -1,0 +1,2 @@
+scopes = ['docker', 'github', 'actions']
+brackets = false
