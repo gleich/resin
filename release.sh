@@ -1,6 +1,6 @@
 # Building binaries
-cross build --release --target=x86_64-unknown-linux-gnu
-cargo build --release --target=x86_64-apple-darwin
+cargo build --release --target=x86_64-unknown-linux-gnu
+cross build --release --target=x86_64-apple-darwin
 
 # Moving binaries
 mkdir -p dist/darwin_amd64 && cp target/x86_64-apple-darwin/release/resin dist/darwin_amd64
