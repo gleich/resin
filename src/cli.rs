@@ -3,6 +3,8 @@ use std::process;
 #[derive(Debug, PartialEq)]
 pub struct Args {
 	pub verbose: bool,
+	pub all: bool,
+	pub push: bool,
 }
 
 pub fn parse_args(args: Vec<String>) -> Args {
@@ -12,6 +14,8 @@ pub fn parse_args(args: Vec<String>) -> Args {
 
 flags:
     --help    (-h) showing this help page
+	--all     (-a) If all files should be added
+	--push    (-p) If the changes should be pushed after running
     --verbose (-v) show full output (default: off)"
 		);
 		process::exit(0);
@@ -19,6 +23,8 @@ flags:
 
 	Args {
 		verbose: has_flag(&args, "verbose", 'v'),
+		push: has_flag(&args, "push", 'p'),
+		all: has_flag(&args, "all", 'a'),
 	}
 }
 
@@ -34,21 +40,49 @@ mod tests {
 	#[test]
 	fn test_parse_args() {
 		// no args
-		assert_eq!(parse_args(to_string_vec(vec![""])), Args { verbose: false });
+		assert_eq!(
+			parse_args(to_string_vec(vec![""])),
+			Args {
+				verbose: false,
+				all: false,
+				push: false
+			}
+		);
 		// shorthand arg
 		assert_eq!(
 			parse_args(to_string_vec(vec!["-v"])),
-			Args { verbose: true }
+			Args {
+				verbose: true,
+				push: false,
+				all: false
+			}
 		);
 		// full name arg
 		assert_eq!(
 			parse_args(to_string_vec(vec!["--verbose"])),
-			Args { verbose: true }
+			Args {
+				verbose: true,
+				push: false,
+				all: false
+			}
 		);
 		// args but no flags
 		assert_eq!(
 			parse_args(to_string_vec(vec!["foo", "bar"])),
-			Args { verbose: false }
+			Args {
+				verbose: false,
+				push: false,
+				all: false
+			}
+		);
+		// multiple
+		assert_eq!(
+			parse_args(to_string_vec(vec!["-p", "--all"])),
+			Args {
+				verbose: false,
+				push: true,
+				all: true
+			}
 		);
 	}
 
