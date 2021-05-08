@@ -7,6 +7,7 @@ use crate::inputs::Inputs;
 use crate::utils::output_success;
 
 pub fn commit_changes(args: &Args, inputs: &Inputs) -> Result<()> {
+	println!();
 	let git_program = "git";
 	if args.all {
 		Command::new(git_program)
@@ -25,7 +26,7 @@ pub fn commit_changes(args: &Args, inputs: &Inputs) -> Result<()> {
 			.args(&["push"])
 			.output()
 			.context("Failed to push changes")?;
-		output_success("Pushes changes");
+		output_success("Pushed changes");
 	}
 	Ok(())
 }
