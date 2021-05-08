@@ -9,13 +9,11 @@ use crate::utils::to_string_vec;
 #[derive(Debug, Deserialize)]
 struct RawTOML {
 	scopes: Option<Vec<String>>,
-	brackets: Option<bool>,
 }
 
 #[derive(Debug, PartialEq)]
 pub struct Config {
 	pub scopes: Vec<String>,
-	pub brackets: bool,
 }
 
 pub fn read() -> Result<Config> {
@@ -32,16 +30,10 @@ pub fn read() -> Result<Config> {
 			let content = fs::read_to_string(path)?;
 			let raw_data: RawTOML = toml::from_str(&content)?;
 			scopes.extend(raw_data.scopes.unwrap_or_default());
-			return Ok(Config {
-				scopes,
-				brackets: raw_data.brackets.unwrap_or_default(),
-			});
+			return Ok(Config { scopes });
 		}
 	}
-	Ok(Config {
-		scopes,
-		brackets: true,
-	})
+	Ok(Config { scopes })
 }
 
 #[cfg(test)]
@@ -60,7 +52,6 @@ mod tests {
 					"none", "lint", "deps", "release", "remove", "license", "config", "scripts",
 					"docker", "github", "actions"
 				]),
-				brackets: false
 			}
 		);
 		Ok(())
