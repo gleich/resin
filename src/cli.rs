@@ -14,8 +14,8 @@ pub fn parse_args(args: Vec<String>) -> Args {
 
 flags:
     --help    (-h) showing this help page
-	--all     (-a) If all files should be added
-	--push    (-p) If the changes should be pushed after running
+    --all     (-a) If all files should be added
+    --push    (-p) If the changes should be pushed after running
     --verbose (-v) show full output (default: off)"
 		);
 		process::exit(0);
