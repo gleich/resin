@@ -2,7 +2,6 @@ use std::process;
 
 #[derive(Debug, PartialEq)]
 pub struct Args {
-	pub verbose: bool,
 	pub all: bool,
 	pub push: bool,
 }
@@ -15,14 +14,12 @@ pub fn parse_args(args: Vec<String>) -> Args {
 flags:
     --help    (-h) showing this help page
     --all     (-a) If all files should be added
-    --push    (-p) If the changes should be pushed after running
-    --verbose (-v) show full output (default: off)"
+    --push    (-p) If the changes should be pushed after running"
 		);
 		process::exit(0);
 	}
 
 	Args {
-		verbose: has_flag(&args, "verbose", 'v'),
 		push: has_flag(&args, "push", 'p'),
 		all: has_flag(&args, "all", 'a'),
 	}
@@ -43,34 +40,31 @@ mod tests {
 		assert_eq!(
 			parse_args(to_string_vec(vec![""])),
 			Args {
-				verbose: false,
 				all: false,
 				push: false
 			}
 		);
 		// shorthand arg
 		assert_eq!(
-			parse_args(to_string_vec(vec!["-v"])),
+			parse_args(to_string_vec(vec!["-p"])),
 			Args {
-				verbose: true,
-				push: false,
+				push: true,
 				all: false
 			}
 		);
-		// full name arg
+		// full arg
 		assert_eq!(
-			parse_args(to_string_vec(vec!["--verbose"])),
+			parse_args(to_string_vec(vec!["--push"])),
 			Args {
-				verbose: true,
-				push: false,
+				push: true,
 				all: false
 			}
 		);
+
 		// args but no flags
 		assert_eq!(
 			parse_args(to_string_vec(vec!["foo", "bar"])),
 			Args {
-				verbose: false,
 				push: false,
 				all: false
 			}
@@ -79,7 +73,6 @@ mod tests {
 		assert_eq!(
 			parse_args(to_string_vec(vec!["-p", "--all"])),
 			Args {
-				verbose: false,
 				push: true,
 				all: true
 			}
@@ -88,16 +81,16 @@ mod tests {
 
 	#[test]
 	fn test_has_flag() {
-		let name = "verbose";
-		let shorthand = 'v';
+		let name = "help";
+		let shorthand = 'h';
 		assert_eq!(has_flag(&vec![], name, shorthand), false);
 		assert_eq!(
 			has_flag(&to_string_vec(vec!["foo", "bar"]), name, shorthand),
 			false
 		);
-		assert_eq!(has_flag(&vec![String::from("-v")], name, shorthand), true);
+		assert_eq!(has_flag(&vec![String::from("-h")], name, shorthand), true);
 		assert_eq!(
-			has_flag(&vec![String::from("--verbose")], name, shorthand),
+			has_flag(&vec![String::from("--help")], name, shorthand),
 			true
 		);
 	}
