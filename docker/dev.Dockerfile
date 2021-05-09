@@ -3,7 +3,7 @@ FROM rust:latest AS builder
 
 # Meta data
 LABEL maintainer="email@mattglei.ch"
-LABEL description="⚗️ CLI interface for the conventional commits commit format"
+LABEL description="⚗️ Superfast CLI interface for the conventional commits commit format"
 
 # File copy
 COPY . /usr/src/app
