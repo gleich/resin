@@ -1,1 +1,1 @@
-scopes = ['docker', 'github', 'actions']
+scopes = ['docker', 'github actions'] 

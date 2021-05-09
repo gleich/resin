@@ -1,7 +1,9 @@
-use std::fs;
 use std::path::Path;
+use std::{env, fs};
 
 use anyhow::Result;
+use directories::UserDirs;
+use itertools::Itertools;
 use serde::Deserialize;
 
 use crate::utils::to_string_vec;
@@ -22,6 +24,7 @@ pub fn read() -> Result<Config> {
 		"none", "lint", "deps", "release", "remove", "license", "config", "scripts",
 	]);
 
+	// Reading local config file
 	for i in 0..fnames.len() {
 		let file_name = format!("{}{}", fnames[i], ".toml");
 		let path = Path::new(&file_name);
@@ -30,9 +33,28 @@ pub fn read() -> Result<Config> {
 			let content = fs::read_to_string(path)?;
 			let raw_data: RawTOML = toml::from_str(&content)?;
 			scopes.extend(raw_data.scopes.unwrap_or_default());
-			return Ok(Config { scopes });
+			break;
 		}
 	}
+
+	// Reading global config file for user
+	let raw_global_path = &format!(
+		"{}/.config/resin/config.toml",
+		UserDirs::new().unwrap().home_dir().display()
+	);
+	let mut global_path = Path::new(&raw_global_path);
+	if env::consts::OS == "windows" {
+		global_path = Path::new(".resin/config.toml");
+	}
+	if global_path.exists() {
+		let content = fs::read_to_string(global_path)?;
+		let raw_data: RawTOML = toml::from_str(&content)?;
+		scopes.extend(raw_data.scopes.unwrap_or_default());
+	}
+
+	// Removing duplicates
+	scopes = scopes.into_iter().unique().collect();
+
 	Ok(Config { scopes })
 }
 
@@ -49,8 +71,16 @@ mod tests {
 			read()?,
 			Config {
 				scopes: to_string_vec(vec![
-					"none", "lint", "deps", "release", "remove", "license", "config", "scripts",
-					"docker", "github", "actions"
+					"none",
+					"lint",
+					"deps",
+					"release",
+					"remove",
+					"license",
+					"config",
+					"scripts",
+					"docker",
+					"github actions"
 				]),
 			}
 		);
