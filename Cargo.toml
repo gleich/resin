@@ -1,10 +1,11 @@
 [package]
 name = "resin"
 version = "0.1.0"
+description = "⚗️ CLI interface for the conventional commits commit format"
 authors = ["Matthew Gleich <email@mattglei.ch>"]
 repository = "https://github.com/Matt-Gleich/resin/"
 homepage = "https://github.com/Matt-Gleich/resin/"
-license = "MPL 2.0"
+license = "MPL-2.0"
 edition = "2018"
 keywords = ["cli", "commit", "git", "standardization"]
 
