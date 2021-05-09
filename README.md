@@ -8,6 +8,48 @@
 
 ⚗️ CLI interface for the conventional commits commit format
 
+## ❓ What is resin?
+
+resin is a CLI (command-line interface) tool that makes it easy to create commit messages that follow the [conventional commit format](https://www.conventionalcommits.org/). Here is a little demo:
+
+![demo](demo.gif)
+
+This demo will create the following commit message:
+
+```txt
+feat(config): add crates.io fields
+```
+
+## ✨ Features
+
+### 🚩 Flags
+
+resin has three flags:
+
+1. --help (-h) -> display a help message to the terminal
+2. --all (-a) -> run `git add .` before committing the changes
+3. --push (-p) -> run `git push` after committing the changes
+
+Super simple and easy to use!
+
+### ⚙️ Configuration
+
+You can configure resin to have your custom scopes. Below is an example config:
+
+```toml
+scopes = ['docker', 'github actions']
+```
+
+This file can be stored in `~/.config/resin/config.toml` for macOS/linux or `~\.resin\config.toml` for windows. You can also store this file on a per-project basis by putting it at the root of the project with the same name. You can see a demo of this [for this project](resin.toml)
+
+## 🚀 Install
+
+You can install resin using [cargo](https://doc.rust-lang.org/cargo/index.html):
+
+```bash
+cargo install resin
+```
+
 ## 🙌 Contributing
 
 We would love to have you contribute! Please read the [contributing guide](CONTRIBUTING.md) before submitting a pull request. Thank you in advance!
