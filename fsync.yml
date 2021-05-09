@@ -3,7 +3,7 @@ replace:
   - before: project_name
     after: resin
   - before: project_description
-    after: ⚗️ CLI interface for the conventional commits commit format
+    after: ⚗️ Superfast CLI interface for the conventional commits commit format
   - before: github_username
     after: Matt-Gleich
   - before: project_author_email
