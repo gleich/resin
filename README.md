@@ -34,13 +34,31 @@ Super simple and easy to use!
 
 ### ⚙️ Configuration
 
+#### 📖 Scopes
+
 You can configure resin to have your custom scopes. Below is an example config:
 
 ```toml
 scopes = ['docker', 'github actions']
 ```
 
-This file can be stored in `~/.config/resin/config.toml` for macOS/linux or `~\.resin\config.toml` for windows. You can also store this file on a per-project basis by putting it at the root of the project with the same name. You can see a demo of this [for this project](resin.toml)
+#### ✍️ Sign-off message
+
+You can also have a sign-off message that is based off the contents of your `~/.gitconfig` file:
+
+```toml
+sign = true
+```
+
+This will create a message that will automatically be added to the bottom of your commit message:
+
+```txt
+Signed-off-by: Matthew Gleich <git@mattglei.ch>
+```
+
+#### 📁 Location
+
+This file can be stored in `~/.config/resin/config.toml` or on a per-project basis by putting it at the root of the project with the same name. You can see a demo of this [for this project](resin.toml)
 
 ## 🚀 Install
 
