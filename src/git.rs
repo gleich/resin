@@ -1,6 +1,6 @@
 use std::fs;
 use std::path::Path;
-use std::process::Command;
+use std::process::{exit, Command, ExitStatus};
 
 use anyhow::{anyhow, Context, Result};
 use configparser::ini::Ini;
@@ -9,31 +9,49 @@ use directories::UserDirs;
 use crate::cli::Args;
 use crate::conf::Config;
 use crate::inputs::Inputs;
-use crate::utils::output_success;
+use crate::utils::{output_failure, output_success};
 
 pub fn commit_changes(conf: &Config, args: &Args, inputs: &Inputs) -> Result<()> {
 	println!();
 	let git_program = "git";
 	if args.all {
-		Command::new(git_program)
+		let status = Command::new(git_program)
 			.args(&["add", "."])
-			.output()
-			.context("Failed to stages all changes")?;
+			.status()
+			.context("Failed to stage all changes")?;
+		check_status(status, "stage all changes");
 		output_success("Staged all changes");
 	}
-	Command::new(git_program)
+
+	let status = Command::new(git_program)
 		.args(&["commit", "-m", &message(conf, inputs)?])
-		.output()
+		.status()
 		.context("Failed to commit changes")?;
+	check_status(status, "commit changes");
 	output_success("Committed changes");
+
 	if args.push {
-		Command::new(git_program)
+		let status = Command::new(git_program)
 			.args(&["push"])
-			.output()
+			.status()
 			.context("Failed to push changes")?;
+		check_status(status, "push changes");
 		output_success("Pushed changes");
 	}
 	Ok(())
+}
+
+fn check_status(status: ExitStatus, task: &str) {
+	if !status.success() {
+		output_failure(
+			format!(
+				"Failed to {}. Try running the command manually and resolving the error",
+				task
+			)
+			.as_str(),
+		);
+		exit(1);
+	}
 }
 
 fn message(conf: &Config, inputs: &Inputs) -> Result<String> {
