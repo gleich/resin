@@ -1,6 +1,6 @@
 [package]
 name = "resin"
-version = "1.1.1"
+version = "1.2.0"
 description = "⚗️ Superfast CLI interface for the conventional commits commit format"
 authors = ["Matthew Gleich <email@mattglei.ch>"]
 repository = "https://github.com/Matt-Gleich/resin/"
