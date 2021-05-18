@@ -12,7 +12,6 @@ use crate::inputs::Inputs;
 use crate::utils::{output_failure, output_success};
 
 pub fn commit_changes(conf: &Config, args: &Args, inputs: &Inputs) -> Result<()> {
-	println!();
 	let git_program = "git";
 	if args.all {
 		let status = Command::new(git_program)
@@ -20,7 +19,8 @@ pub fn commit_changes(conf: &Config, args: &Args, inputs: &Inputs) -> Result<()>
 			.status()
 			.context("Failed to stage all changes")?;
 		check_status(status, "stage all changes");
-		output_success("Staged all changes");
+		println!();
+		output_success("Staged all changes\n");
 	}
 
 	let status = Command::new(git_program)
@@ -31,11 +31,13 @@ pub fn commit_changes(conf: &Config, args: &Args, inputs: &Inputs) -> Result<()>
 	output_success("Committed changes");
 
 	if args.push {
+		println!();
 		let status = Command::new(git_program)
 			.args(&["push"])
 			.status()
 			.context("Failed to push changes")?;
 		check_status(status, "push changes");
+		println!();
 		output_success("Pushed changes");
 	}
 	Ok(())
