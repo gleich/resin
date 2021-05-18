@@ -37,7 +37,6 @@ pub fn commit_changes(conf: &Config, args: &Args, inputs: &Inputs) -> Result<()>
 			.status()
 			.context("Failed to push changes")?;
 		check_status(status, "push changes");
-		println!();
 		output_success("Pushed changes");
 	}
 	Ok(())
