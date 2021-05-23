@@ -13,8 +13,8 @@ use crate::utils::{output_failure, output_success};
 
 pub fn commit_changes(conf: &Config, args: &Args, inputs: &Inputs) -> Result<()> {
 	let git_program = "git";
+	println!();
 	if args.all {
-		println!();
 		let status = Command::new(git_program)
 			.args(&["add", "--verbose", "."])
 			.status()
