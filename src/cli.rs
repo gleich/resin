@@ -1,4 +1,4 @@
-use std::process;
+use clap::{App, Arg};
 
 #[derive(Debug, PartialEq)]
 pub struct Args {
@@ -6,92 +6,27 @@ pub struct Args {
 	pub push: bool,
 }
 
-pub fn parse_args(args: Vec<String>) -> Args {
-	if has_flag(&args, "help", 'h') {
-		println!(
-			"resin :: cli interface for conventional commits
-
-flags:
-    --help    (-h) showing this help page
-    --all     (-a) If all files should be added
-    --push    (-p) If the changes should be pushed after running"
-		);
-		process::exit(0);
-	}
+pub fn parse_args() -> Args {
+	let matches = App::new("resin")
+		.version("1.2.3")
+		.author("Matthew Gleich <email@mattglei.ch>")
+		.about("Superfast CLI interface for the conventional commits commit format")
+		.arg(
+			Arg::with_name("all")
+				.help("Run git add . before committing the the changes")
+				.short("a")
+				.long("all"),
+		)
+		.arg(
+			Arg::with_name("push")
+				.help("Run git push after committing the changes")
+				.short("p")
+				.long("push"),
+		)
+		.get_matches();
 
 	Args {
-		push: has_flag(&args, "push", 'p'),
-		all: has_flag(&args, "all", 'a'),
-	}
-}
-
-fn has_flag(args: &Vec<String>, name: &str, shorthand: char) -> bool {
-	args.contains(&format!("--{}", name)) || args.contains(&format!("-{}", shorthand))
-}
-
-#[cfg(test)]
-mod tests {
-	use super::*;
-	use crate::utils::to_string_vec;
-
-	#[test]
-	fn test_parse_args() {
-		// no args
-		assert_eq!(
-			parse_args(to_string_vec(vec![""])),
-			Args {
-				all: false,
-				push: false
-			}
-		);
-		// shorthand arg
-		assert_eq!(
-			parse_args(to_string_vec(vec!["-p"])),
-			Args {
-				push: true,
-				all: false
-			}
-		);
-		// full arg
-		assert_eq!(
-			parse_args(to_string_vec(vec!["--push"])),
-			Args {
-				push: true,
-				all: false
-			}
-		);
-
-		// args but no flags
-		assert_eq!(
-			parse_args(to_string_vec(vec!["foo", "bar"])),
-			Args {
-				push: false,
-				all: false
-			}
-		);
-		// multiple
-		assert_eq!(
-			parse_args(to_string_vec(vec!["-p", "--all"])),
-			Args {
-				push: true,
-				all: true
-			}
-		);
-	}
-
-	#[test]
-	fn test_has_flag() {
-		let name = "help";
-		let shorthand = 'h';
-		assert_eq!(has_flag(&vec![], name, shorthand), false);
-		assert_eq!(
-			has_flag(&to_string_vec(vec!["foo", "bar"]), name, shorthand),
-			false
-		);
-		assert_eq!(has_flag(&vec![String::from("-h")], name, shorthand), true);
-		assert_eq!(
-			has_flag(&vec![String::from("--help")], name, shorthand),
-			true
-		);
+		all: matches.occurrences_of("all") > 0,
+		push: matches.occurrences_of("push") > 0,
 	}
 }
