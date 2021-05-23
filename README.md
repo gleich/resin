@@ -1,6 +1,6 @@
 <!-- DO NOT REMOVE - contributor_list:data:start:["Matt-Gleich"]:end -->
 
-# resin
+# resin [![crates.io](https://img.shields.io/crates/v/resin.svg)](https://crates.io/crates/resin)
 
 [![lint](https://github.com/Matt-Gleich/resin/actions/workflows/lint.yml/badge.svg)](https://github.com/Matt-Gleich/resin/actions/workflows/lint.yml)
 [![build](https://github.com/Matt-Gleich/resin/actions/workflows/build.yml/badge.svg)](https://github.com/Matt-Gleich/resin/actions/workflows/build.yml)
