@@ -14,12 +14,12 @@ use crate::utils::{output_failure, output_success};
 pub fn commit_changes(conf: &Config, args: &Args, inputs: &Inputs) -> Result<()> {
 	let git_program = "git";
 	if args.all {
+		println!();
 		let status = Command::new(git_program)
-			.args(&["add", "."])
+			.args(&["add", "--verbose", "."])
 			.status()
 			.context("Failed to stage all changes")?;
 		check_status(status, "stage all changes");
-		println!();
 		output_success("Staged all changes\n");
 	}
 
