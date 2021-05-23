@@ -8,7 +8,7 @@ pub struct Args {
 
 pub fn parse_args() -> Args {
 	let matches = App::new("resin")
-		.version("1.3.0")
+		.version("1.3.1")
 		.author("Matthew Gleich <email@mattglei.ch>")
 		.about("Superfast CLI interface for the conventional commits commit format")
 		.arg(
