@@ -1,10 +1,10 @@
-<!-- DO NOT REMOVE - contributor_list:data:start:["Matt-Gleich"]:end -->
+<!-- DO NOT REMOVE - contributor_list:data:start:["gleich"]:end -->
 
 # resin [![crates.io](https://img.shields.io/crates/v/resin.svg)](https://crates.io/crates/resin)
 
-[![lint](https://github.com/Matt-Gleich/resin/actions/workflows/lint.yml/badge.svg)](https://github.com/Matt-Gleich/resin/actions/workflows/lint.yml)
-[![build](https://github.com/Matt-Gleich/resin/actions/workflows/build.yml/badge.svg)](https://github.com/Matt-Gleich/resin/actions/workflows/build.yml)
-[![test](https://github.com/Matt-Gleich/resin/actions/workflows/test.yml/badge.svg)](https://github.com/Matt-Gleich/resin/actions/workflows/test.yml)
+[![lint](https://github.com/gleich/resin/actions/workflows/lint.yml/badge.svg)](https://github.com/gleich/resin/actions/workflows/lint.yml)
+[![build](https://github.com/gleich/resin/actions/workflows/build.yml/badge.svg)](https://github.com/gleich/resin/actions/workflows/build.yml)
+[![test](https://github.com/gleich/resin/actions/workflows/test.yml/badge.svg)](https://github.com/gleich/resin/actions/workflows/test.yml)
 
 ⚗️ Superfast CLI interface for the conventional commits commit format
 
@@ -77,7 +77,7 @@ We would love to have you contribute! Please read the [contributing guide](CONTR
 ## 👥 Contributors
 
 
-- **[@Matt-Gleich](https://github.com/Matt-Gleich)**
+- **[@gleich](https://github.com/gleich)**
 
 <!-- DO NOT REMOVE - contributor_list:end -->
 <!-- prettier-ignore-end -->
