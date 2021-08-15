@@ -13,9 +13,7 @@ keywords = ["cli", "commit", "git", "standardization"]
 anyhow = "1.0.40"
 toml = "0.5.8"
 serde = { version = "1.0.125", features = ["derive"] }
-dialoguer = { version = "0.8.0", git = "https://github.com/mitsuhiko/dialoguer", features = [
-    "fuzzy-select"
-] }
+dialoguer = "0.8.0"
 colored = "2"
 itertools = "0.10.0"
 directories = "3.0.2"
