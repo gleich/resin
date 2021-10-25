@@ -7,4 +7,3 @@ hard_tabs = true
 format_strings = true
 format_code_in_doc_comments = true
 force_multiline_blocks = true
-fn_single_line = true
