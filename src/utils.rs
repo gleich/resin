@@ -1,10 +1,16 @@
 use colored::Colorize;
 
-pub fn to_string_vec(vec: Vec<&str>) -> Vec<String> { vec.into_iter().map(String::from).collect() }
+pub fn to_string_vec(vec: Vec<&str>) -> Vec<String> {
+	vec.into_iter().map(String::from).collect()
+}
 
-pub fn output_success(message: &str) { println!("{} {}", "✔".green(), message.bold()) }
+pub fn output_success(message: &str) {
+	println!("{} {}", "✔".green(), message.bold())
+}
 
-pub fn output_failure(message: &str) { println!("{} {}", "✗".red(), message.bold()) }
+pub fn output_failure(message: &str) {
+	println!("{} {}", "✗".red(), message.bold())
+}
 
 #[cfg(test)]
 mod tests {
