@@ -11,7 +11,7 @@ replace:
   - before: docker_username
     after: mattgleich
   - before: project_author_full_name
-    after: Matthew Gleich
+    after: Matt Gleich
 files:
   - path: .gitignore
     source: https://github.com/gleich/rust_template/blob/main/.gitignore

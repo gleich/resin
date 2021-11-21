@@ -53,7 +53,7 @@ sign = true
 This will create a message that will automatically be added to the bottom of your commit message:
 
 ```txt
-Signed-off-by: Matthew Gleich <git@mattglei.ch>
+Signed-off-by: Matt Gleich <git@mattglei.ch>
 ```
 
 #### 📁 Location
