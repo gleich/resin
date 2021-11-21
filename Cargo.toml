@@ -10,12 +10,12 @@ edition = "2018"
 keywords = ["cli", "commit", "git", "standardization"]
 
 [dependencies]
-anyhow = "1.0.40"
+anyhow = "1.0.47"
 toml = "0.5.8"
-serde = { version = "1.0.125", features = ["derive"] }
+serde = { version = "1.0.130", features = ["derive"] }
 dialoguer = { version = "0.9.0", features = ["fuzzy-select"] }
-colored = "2"
-itertools = "0.10.0"
-directories = "3.0.2"
-configparser = "2.0.1"
+colored = "2.0.0"
+itertools = "0.10.1"
+directories = "4.0.1"
+configparser = "3.0.0"
 clap = "2.33.3"
