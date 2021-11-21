@@ -6,7 +6,7 @@
 [![build](https://github.com/gleich/resin/actions/workflows/build.yml/badge.svg)](https://github.com/gleich/resin/actions/workflows/build.yml)
 [![test](https://github.com/gleich/resin/actions/workflows/test.yml/badge.svg)](https://github.com/gleich/resin/actions/workflows/test.yml)
 
-⚗️ Superfast CLI interface for the conventional commits commit format
+⚗️ Superfast CLI for the conventional commits commit format
 
 ## ❓ What is resin?
 
