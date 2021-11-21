@@ -1,6 +1,6 @@
 use anyhow::{Context, Result};
 use dialoguer::theme::ColorfulTheme;
-use dialoguer::{Input, Select};
+use dialoguer::{FuzzySelect, Input};
 
 use crate::conf;
 
@@ -19,13 +19,13 @@ pub fn get_inputs(config: &conf::Config) -> Result<Inputs> {
 		"revert",
 	];
 
-	let change_type_selection = Select::with_theme(&theme)
+	let change_type_selection = FuzzySelect::with_theme(&theme)
 		.with_prompt("Type")
 		.default(0)
 		.items(change_types)
 		.interact()
 		.context("Failed to present change type selection to user")?;
-	let scope_selection = Select::with_theme(&theme)
+	let scope_selection = FuzzySelect::with_theme(&theme)
 		.with_prompt("Scope")
 		.default(0)
 		.items(&config.scopes)
