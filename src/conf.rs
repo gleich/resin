@@ -43,15 +43,15 @@ pub fn read() -> Result<Config> {
 	};
 
 	// Reading local config file
-	for i in 0..fnames.len() {
-		let file_name = format!("{}{}", fnames[i], ".toml");
+	for file_name in fnames {
+		let file_name = format!("{}{}", file_name, ".toml");
 		let path = Path::new(&file_name);
 
 		if path.exists() {
 			let content = fs::read_to_string(path)?;
 			let raw_data: RawTOML = toml::from_str(&content)?;
 			config.scopes.extend(raw_data.scopes.unwrap_or_default());
-			if !raw_data.sign.is_none() {
+			if raw_data.sign.is_some() {
 				config.sign = raw_data.sign.unwrap();
 			}
 			break;

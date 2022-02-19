@@ -2,7 +2,7 @@ use std::fs;
 use std::path::Path;
 use std::process::{exit, Command, ExitStatus};
 
-use anyhow::{anyhow, Context, Result};
+use anyhow::{anyhow, bail, Context, Result};
 use clap::ArgMatches;
 use configparser::ini::Ini;
 use directories::UserDirs;
@@ -71,7 +71,7 @@ fn message(conf: &Config, inputs: &Inputs) -> Result<String> {
 		} else {
 			&fmt_scope
 		},
-		if inputs.breaking_changes == "" {
+		if inputs.breaking_changes.is_empty() {
 			""
 		} else {
 			"!"
@@ -103,7 +103,7 @@ fn signoff() -> Result<String> {
 			.map_err(|e| anyhow!("Failed to read from gitconfig file: {}", e))?;
 
 		let user_group = "user";
-		let name = config.get(&user_group, "name").unwrap_or_default();
+		let name = config.get(user_group, "name").unwrap_or_default();
 		if name.is_empty() {
 			return Err(anyhow!(
 				"No value provided for name in the user section of your gitconfig"
@@ -117,9 +117,7 @@ fn signoff() -> Result<String> {
 		}
 		return Ok(format!("Signed-off-by: {} <{}>", name, email));
 	}
-	Err(anyhow!(
-		"Failed ot find ~/.config for signoff message. Does it exist?"
-	))
+	bail!("Failed ot find ~/.config for signoff message. Does it exist?")
 }
 
 #[cfg(test)]
