@@ -33,17 +33,17 @@ pub fn get_inputs(config: &conf::Config) -> Result<Inputs> {
 		.context("Failed to present scope selection to user")?;
 	let description: String = Input::with_theme(&theme)
 		.with_prompt("Description")
-		.interact()
+		.interact_text()
 		.context("Failed to ask for description")?;
 	let long_description: String = Input::with_theme(&theme)
 		.allow_empty(true)
 		.with_prompt("Longer description (optional)")
-		.interact()
+		.interact_text()
 		.context("Failed to ask for longer description")?;
 	let breaking_changes: String = Input::with_theme(&theme)
 		.allow_empty(true)
 		.with_prompt("Breaking change (optional)")
-		.interact()
+		.interact_text()
 		.context("Failed to ask for breaking changes")?;
 	Ok(Inputs {
 		change_type: String::from(change_types[change_type_selection]),
