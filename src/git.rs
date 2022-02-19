@@ -3,18 +3,18 @@ use std::path::Path;
 use std::process::{exit, Command, ExitStatus};
 
 use anyhow::{anyhow, Context, Result};
+use clap::ArgMatches;
 use configparser::ini::Ini;
 use directories::UserDirs;
 
-use crate::cli::Args;
 use crate::conf::Config;
 use crate::inputs::Inputs;
 use crate::utils::{output_failure, output_success};
 
-pub fn commit_changes(conf: &Config, args: &Args, inputs: &Inputs) -> Result<()> {
+pub fn commit_changes(conf: &Config, args: &ArgMatches, inputs: &Inputs) -> Result<()> {
 	let git_program = "git";
 	println!();
-	if args.all {
+	if args.is_present("all") {
 		let status = Command::new(git_program)
 			.args(&["add", "--verbose", "."])
 			.status()
@@ -30,7 +30,7 @@ pub fn commit_changes(conf: &Config, args: &Args, inputs: &Inputs) -> Result<()>
 	check_status(status, "commit changes");
 	output_success("Committed changes");
 
-	if args.push {
+	if args.is_present("push") {
 		println!();
 		let status = Command::new(git_program)
 			.args(&["push"])
