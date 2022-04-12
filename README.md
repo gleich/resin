@@ -1,4 +1,4 @@
-<!-- DO NOT REMOVE - contributor_list:data:start:["gleich"]:end -->
+<!-- DO NOT REMOVE - contributor_list:data:start:["gleich", "Liberatys"]:end -->
 
 # resin [![crates.io](https://img.shields.io/crates/v/resin.svg)](https://crates.io/crates/resin)
 
@@ -78,6 +78,8 @@ We would love to have you contribute! Please read the [contributing guide](CONTR
 
 
 - **[@gleich](https://github.com/gleich)**
+
+- **[@Liberatys](https://github.com/Liberatys)**
 
 <!-- DO NOT REMOVE - contributor_list:end -->
 <!-- prettier-ignore-end -->
