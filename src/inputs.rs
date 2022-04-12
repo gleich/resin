@@ -23,14 +23,16 @@ pub fn get_inputs(config: &conf::Config) -> Result<Inputs> {
 		.with_prompt("Type")
 		.default(0)
 		.items(change_types)
-		.interact()
-		.context("Failed to present change type selection to user")?;
+		.interact_opt()
+		.context("Failed to present change type selection to user")?
+		.unwrap_or_else(|| std::process::exit(1));
 	let scope_selection = FuzzySelect::with_theme(&theme)
 		.with_prompt("Scope")
 		.default(0)
 		.items(&config.scopes)
-		.interact()
-		.context("Failed to present scope selection to user")?;
+		.interact_opt()
+		.context("Failed to present scope selection to user")?
+		.unwrap_or_else(|| std::process::exit(1));
 	let description: String = Input::with_theme(&theme)
 		.with_prompt("Description")
 		.interact_text()
