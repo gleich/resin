@@ -16,7 +16,7 @@ pub fn commit_changes(conf: &Config, args: &ArgMatches, inputs: &Inputs) -> Resu
 	println!();
 	if args.is_present("all") {
 		let status = Command::new(git_program)
-			.args(&["add", "--verbose", "."])
+			.args(["add", "--verbose", "."])
 			.status()
 			.context("Failed to stage all changes")?;
 		check_status(status, "stage all changes");
@@ -24,7 +24,7 @@ pub fn commit_changes(conf: &Config, args: &ArgMatches, inputs: &Inputs) -> Resu
 	}
 
 	let status = Command::new(git_program)
-		.args(&["commit", "-m", &message(conf, inputs)?])
+		.args(["commit", "-m", &message(conf, inputs)?])
 		.status()
 		.context("Failed to commit changes")?;
 	check_status(status, "commit changes");
@@ -33,7 +33,7 @@ pub fn commit_changes(conf: &Config, args: &ArgMatches, inputs: &Inputs) -> Resu
 	if args.is_present("push") {
 		println!();
 		let status = Command::new(git_program)
-			.args(&["push"])
+			.args(["push"])
 			.status()
 			.context("Failed to push changes")?;
 		check_status(status, "push changes");
