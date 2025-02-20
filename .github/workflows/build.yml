@@ -25,6 +25,4 @@ jobs:
               - 'Cargo.lock'
               - '.github/workflows/**'
       - if: steps.changes.outputs.rust == 'true'
-        uses: davidB/rust-cargo-make@v1
-      - if: steps.changes.outputs.rust == 'true'
         run: cargo build
