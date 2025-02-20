@@ -14,7 +14,7 @@ use crate::utils::{output_failure, output_success};
 pub fn commit_changes(conf: &Config, args: &ArgMatches, inputs: &Inputs) -> Result<()> {
 	let git_program = "git";
 	println!();
-	if args.is_present("all") {
+	if args.get_flag("all") {
 		let status = Command::new(git_program)
 			.args(["add", "--verbose", "."])
 			.status()
@@ -30,7 +30,7 @@ pub fn commit_changes(conf: &Config, args: &ArgMatches, inputs: &Inputs) -> Resu
 	check_status(status, "commit changes");
 	output_success("Committed changes");
 
-	if args.is_present("push") {
+	if args.get_flag("push") {
 		println!();
 		let status = Command::new(git_program)
 			.args(["push"])
@@ -56,7 +56,7 @@ fn check_status(status: ExitStatus, task: &str) {
 }
 
 fn message(conf: &Config, inputs: &Inputs) -> Result<String> {
-	let fmt_scope = format!("({})", inputs.scope);
+	let fmt_scope = format!("[{}]", inputs.scope);
 	let message = format!(
 		"{}{}{}: {}
 
@@ -158,7 +158,7 @@ mod tests {
 					breaking_changes: String::from("")
 				}
 			)?,
-			String::from("feat(lang): add polish language")
+			String::from("feat[lang]: add polish language")
 		);
 		// Long description
 		assert_eq!(
@@ -179,7 +179,7 @@ mod tests {
 				}
 			)?,
 			String::from(
-				"feat(lang): add polish language\n\nadded this language because it is super cool \
+				"feat[lang]: add polish language\n\nadded this language because it is super cool \
 				 and we need more languages like it."
 			)
 		);
@@ -202,7 +202,7 @@ mod tests {
 				}
 			)?,
 			String::from(
-				"feat(lang)!: add polish language\n\nadded this language because it is super cool \
+				"feat[lang]!: add polish language\n\nadded this language because it is super cool \
 				 and we need more languages like it.\n\nThis breaks some other languages."
 			)
 		);

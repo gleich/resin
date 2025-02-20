@@ -1,6 +1,6 @@
 use clap::{Arg, Command};
 
-pub fn setup() -> Command<'static> {
+pub fn setup() -> Command {
 	Command::new("resin")
 		.version("1.5.0")
 		.author("Matt Gleich <email@mattglei.ch>")
