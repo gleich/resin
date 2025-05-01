@@ -2,7 +2,7 @@ use clap::{Arg, Command};
 
 pub fn setup() -> Command {
 	Command::new("resin")
-		.version("1.5.0")
+		.version("1.6.2")
 		.author("Matt Gleich <email@mattglei.ch>")
 		.about("Superfast CLI interface for the conventional commits commit format")
 		.arg(
