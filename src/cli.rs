@@ -9,12 +9,14 @@ pub fn setup() -> Command {
 			Arg::new("all")
 				.help("Run git add . before committing the the changes")
 				.short('a')
-				.long("all"),
+				.long("all")
+				.num_args(0),
 		)
 		.arg(
 			Arg::new("push")
 				.help("Run git push after committing the changes")
 				.short('p')
-				.long("push"),
+				.long("push")
+				.num_args(0),
 		)
 }
