@@ -4,7 +4,7 @@ pub fn setup() -> Command {
 	Command::new("resin")
 		.version("1.6.2")
 		.author("Matt Gleich <email@mattglei.ch>")
-		.about("Superfast CLI interface for the conventional commits commit format")
+		.about("Fast CLI for conventional commits")
 		.arg(
 			Arg::new("all")
 				.help("Run git add . before committing the the changes")
