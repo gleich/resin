@@ -5,7 +5,7 @@ description = "Fast CLI for conventional commits"
 authors = ["Matt Gleich <email@mattglei.ch>"]
 repository = "https://github.com/gleich/resin/"
 homepage = "https://github.com/gleich/resin/"
-license = "MPL-2.0"
+license = "MIT"
 edition = "2021"
 keywords = ["cli", "commit", "git", "standardization"]
 
