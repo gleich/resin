@@ -7,14 +7,14 @@ pub fn setup() -> Command {
 		.about("Fast CLI for conventional commits")
 		.arg(
 			Arg::new("all")
-				.help("Run git add . before committing the the changes")
+				.help("Stage all changes in the current directory before committing")
 				.short('a')
 				.long("all")
 				.num_args(0),
 		)
 		.arg(
 			Arg::new("push")
-				.help("Run git push after committing the changes")
+				.help("Push changes after committing")
 				.short('p')
 				.long("push")
 				.num_args(0),
