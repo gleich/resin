@@ -1,5 +1,3 @@
-<!-- DO NOT REMOVE - contributor_list:data:start:["gleich"]:end -->
-
 # resin
 
 [![crates.io](https://img.shields.io/crates/v/resin.svg)](https://crates.io/crates/resin)
