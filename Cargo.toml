@@ -10,12 +10,12 @@ edition = "2021"
 keywords = ["cli", "commit", "git", "standardization"]
 
 [dependencies]
-anyhow = "1.0.96"
-toml = "0.8.20"
-serde = { version = "1.0.218", features = ["derive"] }
+anyhow = "1.0.98"
+toml = "0.8.22"
+serde = { version = "1.0.219", features = ["derive"] }
 dialoguer = { version = "0.11.0", features = ["fuzzy-select"] }
 colored = "3.0.0"
 itertools = "0.14.0"
 directories = "6.0.0"
 configparser = "3.1.0"
-clap = "4.5.30"
+clap = "4.5.38"
