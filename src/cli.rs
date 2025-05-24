@@ -4,7 +4,7 @@ pub fn setup() -> Command {
 	Command::new("resin")
 		.version("1.6.3")
 		.author("Matt Gleich <email@mattglei.ch>")
-		.about("Fast CLI for conventional commits")
+		.about("Fast CLI for conventional commits\nhttps://github.com/gleich/resin")
 		.arg(
 			Arg::new("all")
 				.help("Stage all changes in the current directory before committing")
