@@ -1,12 +1,13 @@
 <!-- DO NOT REMOVE - contributor_list:data:start:["gleich"]:end -->
 
-# resin [![crates.io](https://img.shields.io/crates/v/resin.svg)](https://crates.io/crates/resin)
+# resin
 
+[![crates.io](https://img.shields.io/crates/v/resin.svg)](https://crates.io/crates/resin)
 [![lint](https://github.com/gleich/resin/actions/workflows/lint.yml/badge.svg)](https://github.com/gleich/resin/actions/workflows/lint.yml)
 [![build](https://github.com/gleich/resin/actions/workflows/build.yml/badge.svg)](https://github.com/gleich/resin/actions/workflows/build.yml)
 [![test](https://github.com/gleich/resin/actions/workflows/test.yml/badge.svg)](https://github.com/gleich/resin/actions/workflows/test.yml)
 
-Superfast CLI for the conventional commits commit format
+Fast CLI for conventional commits
 
 ## What is resin?
 
@@ -18,6 +19,14 @@ This demo will create the following commit message:
 
 ```txt
 feat[config]: add crates.io fields
+```
+
+## Install
+
+You can install resin using [cargo](https://doc.rust-lang.org/cargo/index.html):
+
+```bash
+cargo install resin
 ```
 
 ## Features
@@ -33,6 +42,8 @@ resin has three flags:
 Super simple and easy to use!
 
 ### Configuration
+
+Configuration is stored in `~/.config/resin/config.toml` or on a per-project basis by putting it at the root of the project with the same name. You can see a demo of this [for this project](resin.toml)
 
 #### Scopes
 
@@ -56,14 +67,10 @@ This will create a message that will automatically be added to the bottom of you
 Signed-off-by: Matt Gleich <git@mattglei.ch>
 ```
 
-#### Location
+#### Parentheses
 
-This file can be stored in `~/.config/resin/config.toml` or on a per-project basis by putting it at the root of the project with the same name. You can see a demo of this [for this project](resin.toml)
+To have the scope of the commit message be in parentheses instead of square brackets:
 
-## Install
-
-You can install resin using [cargo](https://doc.rust-lang.org/cargo/index.html):
-
-```bash
-cargo install resin
+```toml
+parentheses = true
 ```

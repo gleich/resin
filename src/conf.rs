@@ -18,6 +18,7 @@ struct RawTOML {
 pub struct Config {
 	pub scopes: Vec<String>,
 	pub sign: bool,
+	pub parentheses: bool,
 }
 
 pub fn read() -> Result<Config> {
@@ -27,9 +28,10 @@ pub fn read() -> Result<Config> {
 			"none", "lint", "deps", "release", "license", "config", "scripts", "styles",
 		]),
 		sign: false,
+		parentheses: false,
 	};
 
-	// Reading global config file for user
+	// reading global config file for user
 	let raw_global_path = &format!(
 		"{}/.config/resin/config.toml",
 		UserDirs::new().unwrap().home_dir().display()
@@ -42,7 +44,7 @@ pub fn read() -> Result<Config> {
 		config.scopes.extend(raw_data.scopes.unwrap_or_default());
 	};
 
-	// Reading local config file
+	// reading local config file
 	for file_name in fnames {
 		let file_name = format!("{}{}", file_name, ".toml");
 		let path = Path::new(&file_name);
@@ -58,7 +60,7 @@ pub fn read() -> Result<Config> {
 		}
 	}
 
-	// Removing duplicates
+	// removing duplicates
 	config.scopes = config.scopes.into_iter().unique().collect();
 
 	Ok(config)
@@ -89,6 +91,7 @@ mod tests {
 					"github actions"
 				]),
 				sign: false,
+				parentheses: false,
 			},
 		);
 		Ok(())

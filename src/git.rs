@@ -1,5 +1,4 @@
 use std::fs;
-use std::path::Path;
 use std::process::{exit, Command, ExitStatus};
 
 use anyhow::{anyhow, bail, Context, Result};
@@ -56,7 +55,11 @@ fn check_status(status: ExitStatus, task: &str) {
 }
 
 fn message(conf: &Config, inputs: &Inputs) -> Result<String> {
-	let fmt_scope = format!("[{}]", inputs.scope);
+	let fmt_scope = if conf.parentheses {
+		format!("({})", inputs.scope)
+	} else {
+		format!("[{}]", inputs.scope)
+	};
 	let message = format!(
 		"{}{}{}: {}
 
@@ -88,12 +91,7 @@ fn message(conf: &Config, inputs: &Inputs) -> Result<String> {
 
 /// Create the sign off message based off the user's ~/.gitconfig
 fn signoff() -> Result<String> {
-	// Finding gitconfig
-	let raw_gitconfig_path = &format!(
-		"{}/.gitconfig",
-		UserDirs::new().unwrap().home_dir().display()
-	);
-	let gitconfig_path = Path::new(raw_gitconfig_path);
+	let gitconfig_path = UserDirs::new().unwrap().home_dir().join(".gitconfig");
 
 	// Reading the values
 	if gitconfig_path.exists() {
@@ -117,7 +115,7 @@ fn signoff() -> Result<String> {
 		}
 		return Ok(format!("Signed-off-by: {} <{}>", name, email));
 	}
-	bail!("Failed ot find ~/.config for signoff message. Does it exist?")
+	bail!("Failed to find ~/.config for signoff message. Does it exist?")
 }
 
 #[cfg(test)]
@@ -126,12 +124,13 @@ mod tests {
 
 	#[test]
 	fn test_message() -> Result<()> {
-		// Simple message
+		// simple message
 		assert_eq!(
 			message(
 				&Config {
 					scopes: vec![],
-					sign: false
+					sign: false,
+					parentheses: false,
 				},
 				&Inputs {
 					change_type: String::from("feat"),
@@ -148,7 +147,8 @@ mod tests {
 			message(
 				&Config {
 					scopes: vec![],
-					sign: false
+					sign: false,
+					parentheses: false,
 				},
 				&Inputs {
 					change_type: String::from("feat"),
@@ -160,12 +160,31 @@ mod tests {
 			)?,
 			String::from("feat[lang]: add polish language")
 		);
-		// Long description
+		// with scope and parentheses
 		assert_eq!(
 			message(
 				&Config {
 					scopes: vec![],
-					sign: false
+					sign: false,
+					parentheses: true,
+				},
+				&Inputs {
+					change_type: String::from("feat"),
+					scope: String::from("lang"),
+					description: String::from("add polish language"),
+					long_description: String::from(""),
+					breaking_changes: String::from("")
+				}
+			)?,
+			String::from("feat(lang): add polish language")
+		);
+		// long description
+		assert_eq!(
+			message(
+				&Config {
+					scopes: vec![],
+					sign: false,
+					parentheses: false,
 				},
 				&Inputs {
 					change_type: String::from("feat"),
@@ -183,12 +202,13 @@ mod tests {
 				 and we need more languages like it."
 			)
 		);
-		// Breaking changes
+		// breaking changes
 		assert_eq!(
 			message(
 				&Config {
 					scopes: vec![],
-					sign: false
+					sign: false,
+					parentheses: false,
 				},
 				&Inputs {
 					change_type: String::from("feat"),
