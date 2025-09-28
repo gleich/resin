@@ -6,7 +6,7 @@ authors = ["Matt Gleich <email@mattglei.ch>"]
 repository = "https://github.com/gleich/resin/"
 homepage = "https://github.com/gleich/resin/"
 license = "MIT"
-edition = "2021"
+edition = "2024"
 keywords = ["cli", "commit", "git", "standardization"]
 
 [dependencies]
