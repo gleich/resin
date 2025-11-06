@@ -1,7 +1,7 @@
 use std::fs;
-use std::process::{exit, Command, ExitStatus};
+use std::process::{Command, ExitStatus, exit};
 
-use anyhow::{anyhow, bail, Context, Result};
+use anyhow::{Context, Result, anyhow, bail};
 use clap::ArgMatches;
 use configparser::ini::Ini;
 use directories::UserDirs;
