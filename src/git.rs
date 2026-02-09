@@ -1,20 +1,23 @@
-use std::fs;
+use std::path::PathBuf;
 use std::process::{Command, ExitStatus, exit};
+use std::{env, fs};
 
 use anyhow::{Context, Result, anyhow, bail};
 use clap::ArgMatches;
 use configparser::ini::Ini;
+use dialoguer::Confirm;
 use directories::UserDirs;
 
 use crate::conf::Config;
-use crate::inputs::Inputs;
+use crate::inputs::{self, Inputs};
 use crate::utils::{output_failure, output_success};
 
+const GIT: &str = "git";
+
 pub fn commit_changes(conf: &Config, args: &ArgMatches, inputs: &Inputs) -> Result<()> {
-	let git_program = "git";
 	println!();
 	if args.get_flag("all") {
-		let status = Command::new(git_program)
+		let status = Command::new(GIT)
 			.args(["add", "--verbose", "."])
 			.status()
 			.context("Failed to stage all changes")?;
@@ -22,7 +25,7 @@ pub fn commit_changes(conf: &Config, args: &ArgMatches, inputs: &Inputs) -> Resu
 		output_success("Staged all changes\n");
 	}
 
-	let status = Command::new(git_program)
+	let status = Command::new(GIT)
 		.args(["commit", "-m", &message(conf, inputs)?])
 		.status()
 		.context("Failed to commit changes")?;
@@ -31,12 +34,36 @@ pub fn commit_changes(conf: &Config, args: &ArgMatches, inputs: &Inputs) -> Resu
 
 	if args.get_flag("push") {
 		println!();
-		let status = Command::new(git_program)
+		let status = Command::new(GIT)
 			.args(["push"])
 			.status()
 			.context("Failed to push changes")?;
 		check_status(status, "push changes");
 		output_success("Pushed changes");
+	}
+	Ok(())
+}
+
+pub fn check_location() -> Result<()> {
+	let output = Command::new(GIT)
+		.args(["rev-parse", "--show-toplevel"])
+		.output()
+		.context("Failed to get repoisotry toplevel directory")?;
+	check_status(output.status, "finding repo top level directory");
+	let cwd = env::current_dir().context("Failed to get current working directory")?;
+	let repo_top_dir = String::from_utf8_lossy(&output.stdout)
+		.trim_end()
+		.to_string();
+	if repo_top_dir != cwd.to_str().unwrap() {
+		let go_to_root = Confirm::with_theme(&*inputs::THEME)
+			.default(false)
+			.with_prompt("Do you want to run this command from the root of this repository?")
+			.interact()
+			.context("Failed to ask if user wants to run from root of repository")?;
+		if go_to_root {
+			env::set_current_dir(PathBuf::from(repo_top_dir))
+				.context("failed to go to root directory")?;
+		}
 	}
 	Ok(())
 }
